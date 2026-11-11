@@ -151,7 +151,7 @@ body.lock{overflow:hidden}
 <script>
 (function(){function show(m){try{var b=document.getElementById("errbar");if(!b){b=document.createElement("div");b.id="errbar";b.style.cssText="position:fixed;left:8px;right:8px;bottom:8px;z-index:99999;background:#b3261e;color:#fff;font:12px/1.4 sans-serif;padding:8px 10px;border-radius:8px;white-space:pre-wrap;word-break:break-all";b.onclick=function(){b.remove()};(document.body||document.documentElement).appendChild(b)}b.textContent="エラー（この画面をスクショして送ってください）\n"+m}catch(e){}}
 window.__yachoErr=show;
-window.addEventListener("error",function(e){var t=(e.message||"error")+(e.lineno?" @"+e.lineno+":"+e.colno:"");try{if(window.__yachoSrc&&e.lineno){var l=window.__yachoSrc.split("\n")[e.lineno-1]||"",c=(e.colno||1)-1;t+="\n…"+l.slice(Math.max(0,c-50),c)+"⟦"+l.slice(c,c+30)+"⟧"}}catch(_){}show(t)});
+window.addEventListener("error",function(e){if(!e.lineno&&/^Script error\.?$/.test(e.message||""))return;/* 拡張機能など外部のスクリプトのエラーは中身が見えないので出さない */var t=(e.message||"error")+(e.lineno?" @"+e.lineno+":"+e.colno:"");try{if(window.__yachoSrc&&e.lineno){var l=window.__yachoSrc.split("\n")[e.lineno-1]||"",c=(e.colno||1)-1;t+="\n…"+l.slice(Math.max(0,c-50),c)+"⟦"+l.slice(c,c+30)+"⟧"}}catch(_){}show(t)});
 window.addEventListener("unhandledrejection",function(e){var r=e.reason;show("Promise: "+(r&&(r.stack||r.message)||r))});})();
 </script>
 </head>
