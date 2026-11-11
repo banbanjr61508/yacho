@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>野帳</title>
+<meta name="apple-mobile-web-app-title" content="野帳">
+<meta name="application-name" content="野帳">
+<meta name="theme-color" content="#2c352f">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<script>
+/* ↓ Apps Script の「ウェブアプリ」URL（…/exec）に置き換える */
+var EXEC = "https://script.google.com/macros/s/AKfycbyIZve1DXzTNPtjNTWBcB1H91mrcQa7lhIGqtZhhpZXm7-hvVeV6-BRe1rBwcuJXC-X-g/exec";
+/* ホーム画面から開いたとき（?go=1）はすぐアプリへ */
+if (/[?&]go=1/.test(location.search) && EXEC.indexOf("http") === 0) location.replace(EXEC);
+</script>
+<style>
+  :root{--bg:#f3efe7;--ink:#222;--green:#2c352f;--red:#b3261e}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 -apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif}
+  header{background:var(--green);color:#fff;padding:40px 20px 28px;text-align:center}
+  header img{width:96px;height:96px;border-radius:22px;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+  header h1{margin:14px 0 2px;font-size:26px;letter-spacing:.1em}
+  header p{margin:0;opacity:.75;font-size:13px}
+  main{max-width:460px;margin:0 auto;padding:22px 18px 40px}
+  .open{display:block;text-align:center;background:var(--green);color:#fff;text-decoration:none;font-weight:700;font-size:18px;padding:16px;border-radius:14px}
+  h2{font-size:15px;margin:30px 0 8px}
+  ol{margin:0;padding-left:1.4em}
+  li{margin:4px 0}
+  .box{background:#fff;border-radius:12px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+  .note{font-size:13px;color:#666;margin-top:10px}
+  .ng{color:var(--red);font-weight:700}
+</style>
+</head>
+<body>
+<header>
+  <img src="apple-touch-icon.png" alt="">
+  <h1>野帳</h1>
+  <p>会場下見の書き込みメモ</p>
+</header>
+<main>
+  <a class="open" id="open" href="#">野帳をひらく</a>
+
+  <h2>ホーム画面に置く（iPhone）</h2>
+  <div class="box"><ol>
+    <li>この画面を <b>Safari</b> で開く</li>
+    <li>下の <b>共有ボタン</b>（□に↑）をタップ</li>
+    <li><b>「ホーム画面に追加」</b> →「追加」</li>
+  </ol>
+  <div class="note">次からはホーム画面の仮面アイコンをタップすると、そのまま野帳が開きます。</div></div>
+
+  <h2>ホーム画面に置く（Android）</h2>
+  <div class="box"><ol>
+    <li>この画面を <b>Chrome</b> で開く</li>
+    <li>右上の <b>⋮</b> をタップ</li>
+    <li><b>「ホーム画面に追加」</b> →「追加」</li>
+  </ol></div>
+
+  <p class="note"><span class="ng">LINEの中で開いた場合</span>は、右下（または右上）のメニューから「ブラウザで開く」を選んでから追加してください。</p>
+</main>
+<script>
+  var a = document.getElementById("open");
+  if (EXEC.indexOf("http") === 0) a.href = EXEC; else { a.textContent = "（準備中：URL未設定）"; a.style.opacity = .5; }
+  /* ここで「ホーム画面に追加」すると ?go=1 付きで保存される → 次回から直接アプリへ */
+  try { if (!/[?&]go=1/.test(location.search)) history.replaceState(null, "", location.pathname + "?go=1"); } catch (e) {}
+</script>
+</body>
+</html>
